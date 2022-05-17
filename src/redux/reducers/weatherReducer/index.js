@@ -1,11 +1,16 @@
 import {
-    GET_WEATHER_DATA
+    GET_WEATHER_DATA,
+    GET_WEATHER_FIVEDAY_DATA
 } from "../../actions/weatherAction"
 
 const initialState = {
     getWeatherResult: false,
     getWeatherLoading: false,
     getWeatherError: false,
+
+    getWeatherFiveDayResult: false,
+    getWeatherFiveDayLoading: false,
+    getWeatherFiveDayError: false,
 }
 
 const weatherReducer = (state = initialState, action) => {
@@ -16,6 +21,13 @@ const weatherReducer = (state = initialState, action) => {
                 getWeatherResult: action.payload.data,
                 getWeatherLoading: action.payload.loading,
                 getWeatherError: action.payload.errorMessage
+            }
+        case GET_WEATHER_FIVEDAY_DATA:
+            return {
+                ...state,
+                getWeatherFiveDayResult: action.payload.data,
+                getWeatherFiveDayLoading: action.payload.loading,
+                getWeatherFiveDayError: action.payload.errorMessage
             }
             default: 
             return state
