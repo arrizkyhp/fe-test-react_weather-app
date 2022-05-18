@@ -25,7 +25,7 @@ const Tanggal = ({dataCalc, timezone, waktu}) => {
       }
 
   return (
-    <h2>{tanggalIndonesia}</h2>
+    <h2 className='font-bold md:font-semibold text-lg md:text-base'>{tanggalIndonesia}</h2>
   )
 }
 

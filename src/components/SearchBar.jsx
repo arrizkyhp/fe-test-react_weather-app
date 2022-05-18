@@ -34,12 +34,12 @@ const SearchBar = ({ placeholder, data }) => {
     // console.log(getFilteredWeatherResult)
 
   return (
-    <div className='relative'>
+    <div className='relative px-6 md:px-0'>
         <div className="relative">
             <input className='w-full px-4 h-10 rounded-lg' placeholder={placeholder} onChange={handleFilter}/>
             <FaSearch className='absolute right-4 top-3 text-slate-400' />
         </div>
-        <div className={`${filteredData === "" || !itemFilter ? "hidden" : "flex"} absolute w-full border border-slate-400 shadow-xl flex-col bg-white`}>
+        <div className={`${filteredData === "" || !itemFilter ? "hidden" : "flex"} absolute w-10/12 md:w-full border border-slate-400 shadow-xl flex-col bg-white`}>
             {getFilteredWeatherResult ? (
                 <button className='px-4 py-5 text-left' onClick={handleClick}>{getFilteredWeatherResult.name}, {getFilteredWeatherResult.sys.country}</button>
             ): <p>Not Found</p>}

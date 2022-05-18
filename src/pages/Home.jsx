@@ -91,21 +91,21 @@ const Home = () => {
       {error ? <p className='text-center text-lg text-rose-500 mt-5'>{errorMessage}</p> : getWeatherResult ? 
         (
             <Card>
-              <div className="flex justify-between">
+              <div className="flex justify-start md:justify-between flex-col md:flex-row px-6 md:px-0">
                 <div className="flex flex-col">
                   <h2 className='font-semibold text-2xl'>{getWeatherResult.name}, <span className='text-2xl'>{getWeatherResult.sys.country}</span> </h2>
                 </div>
-                <div className="flex flex-col items-end">
+                <div className="flex flex-col items-start md:items-end">
                   <Tanggal dataCalc={getWeatherResult.dt} timezone={getWeatherResult.timezone} />
                   <Tanggal waktu dataCalc={getWeatherResult.dt} timezone={getWeatherResult.timezone} />
                 </div>
               </div>
-              <div className="flex flex-col items-center">
+              <div className="flex flex-col items-center mt-5 md:mt-0">
                 <h1 className='font-bold text-8xl flex'>{getWeatherResult.main.temp.toFixed(0)}°<span className='text-6xl'>C</span></h1>
                 <h2 className='font-medium text-4xl'>{getWeatherResult.weather[0].main}</h2>
                 <h3 className='text-base'>{getWeatherResult.weather[0].description}</h3>
               </div>
-              <div className="flex mt-8 gap-4 mb-8">
+              <div className="flex flex-col md:flex-row mt-8 gap-4 mb-8 px-6 md:px-0">
                 <div className="flex flex-col bg-slate-300 p-4 rounded-lg items-center w-full">
                   <h1>Humidity</h1>
                   <p className='text-2xl font-semibold'>{getWeatherResult.main.humidity}%</p>
@@ -120,7 +120,7 @@ const Home = () => {
                 </div>
               </div>
             <hr className='mb-5'/>
-              <div className="flex justify-end">
+              <div className="flex justify-end px-6 md:px-0">
                 <Link className='bg-emerald-600 px-6 py-4 rounded-full text-white font-semibold' to={{pathname: "/day", latitude: { latitude }}}>Next 6 Days Weather</Link>
               </div>
             </Card>
