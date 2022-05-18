@@ -5,6 +5,8 @@ import {
 
 const initialState = {
     getWeatherResult: false,
+    getWeatherLatitude: false,
+    getWeatherLongitude: false,
     getWeatherLoading: false,
     getWeatherError: false,
 
@@ -19,6 +21,8 @@ const weatherReducer = (state = initialState, action) => {
             return {
                 ...state,
                 getWeatherResult: action.payload.data,
+                getWeatherLatitude: action.payload.latitude,
+                getWeatherLongitude: action.payload.longitude,
                 getWeatherLoading: action.payload.loading,
                 getWeatherError: action.payload.errorMessage
             }

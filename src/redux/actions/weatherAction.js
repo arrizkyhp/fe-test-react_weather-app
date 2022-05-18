@@ -12,6 +12,8 @@ export const getWeatherData = (lat, lon) => {
             payload: {
                 loading: true,
                 data: false,
+                latitude: false,
+                longitude: false,
                 errorMessage: false
             }
         })
@@ -26,6 +28,8 @@ export const getWeatherData = (lat, lon) => {
                 payload: {
                     loading: false,
                     data: response.data,
+                    latitude: lat,
+                    longitude: lon,
                     errorMessage: false
                 }
             })
@@ -36,6 +40,8 @@ export const getWeatherData = (lat, lon) => {
                 payload: {
                     loading: false,
                     data: false,
+                    latitude: false,
+                    longitude: false,
                     errorMessage: error.message
                 }
             })

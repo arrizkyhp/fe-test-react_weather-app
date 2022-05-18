@@ -9,18 +9,57 @@ import { getWeatherData } from "../redux/actions/weatherAction"
 const Home = () => {
     const [latitude, setLatitude] = useState("");
     const [longitude, setLongitude] = useState("");
+    const [error, setError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
 
     const { getWeatherResult, getWeatherLoading, getWeatherError } = useSelector((state) => state.weatherReducer)
     const dispatch = useDispatch();
 
-    // console.log(getWeatherResult.main.temp)
+    const showPosition = (position) => {
+      setLatitude(position.coords.latitude)
+      setLongitude(position.coords.longitude)
+    }
+
+    const showError = (error) => {
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          setError(true)
+          setErrorMessage("User denied the request for Geolocation.")
+          break;
+        case error.POSITION_UNAVAILABLE:
+          setError(true)
+          setErrorMessage("Location information is unavailable.")
+          break;
+        case error.TIMEOUT:
+          setError(true)
+          setErrorMessage("The request to get user location timed out.")
+          break;
+        case error.UNKNOWN_ERROR:
+          setError(true)
+          setErrorMessage("An unknown error occurred.")
+          break;
+        default:
+          break
+      }
+    }
+
+    // Get Current Location
+    const getLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+      } else {
+        console.log("Geolocation is not supported by this browser.")
+      }
+    }
+
   
 
     useEffect(() => {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        setLatitude(position.coords.latitude)
-        setLongitude(position.coords.longitude)
-      });
+      getLocation();
+      // navigator.geolocation.getCurrentPosition(function(position) {
+      //   setLatitude(position.coords.latitude)
+      //   setLongitude(position.coords.longitude)
+      // });
   
      if (latitude != "") {
       dispatch(getWeatherData(latitude, longitude))
@@ -39,7 +78,7 @@ const Home = () => {
       <input className='w-full px-4 h-10 rounded-lg' placeholder='Search City...'/>
       {/* <h1>Latitude: {latitude}</h1>
       <h1>Longitude: {longitude}</h1> */}
-      {getWeatherResult ? 
+      {error ? <p className='text-center text-lg text-rose-500 mt-5'>{errorMessage}</p> : getWeatherResult ? 
         (
             <Card>
               <div className="flex justify-between">

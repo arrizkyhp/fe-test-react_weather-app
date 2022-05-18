@@ -8,15 +8,22 @@ import { getWeatherFiveDayData } from '../redux/actions/weatherAction';
 const Days = (props) => {
     const [latitude, setLatitude] = useState("");
     const [longitude, setLongitude] = useState("");
+    const [error, setError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
 
-    const { getWeatherFiveDayResult, getWeatherFiveDayLoading, getWeatherFiveDayError} = useSelector((state) => state.weatherReducer)
+    const { 
+      getWeatherFiveDayResult, 
+      getWeatherFiveDayLoading, 
+      getWeatherFiveDayError, 
+      getWeatherLatitude,
+      getWeatherLongitude
+    } = useSelector((state) => state.weatherReducer)
     const dispatch = useDispatch();
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          setLatitude(position.coords.latitude)
-          setLongitude(position.coords.longitude)
-        });
+        // getLocation();
+        setLatitude(getWeatherLatitude)
+        setLongitude(getWeatherLongitude)
     
         if (latitude != "") {
             dispatch(getWeatherFiveDayData(latitude, longitude))
@@ -27,11 +34,13 @@ const Days = (props) => {
         return (3.6 * anginMeter).toFixed(0)
       }
 
-      console.log(getWeatherFiveDayResult)
+      // console.log(getWeatherFiveDayResult)
+      // console.log(getWeatherLatitude)
+      // console.log(getWeatherLongitude)
   return (
     <>
         <Navigation day />
-        {getWeatherFiveDayResult ? 
+        {error ? <p className='text-center text-lg text-rose-500 mt-5'>{errorMessage}</p> : getWeatherFiveDayResult ? 
         (
             <Card>
                 <h1 className='text-2xl font-bold'>6 Day Weather</h1>
