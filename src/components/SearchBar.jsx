@@ -41,7 +41,7 @@ const SearchBar = ({ placeholder, data }) => {
         </div>
         <div className={`${filteredData === "" || !itemFilter ? "hidden" : "flex"} absolute w-full border border-slate-400 shadow-xl flex-col bg-white`}>
             {getFilteredWeatherResult ? (
-                <button className='px-4 py-5 text-left' onClick={handleClick}>{getFilteredWeatherResult.name}</button>
+                <button className='px-4 py-5 text-left' onClick={handleClick}>{getFilteredWeatherResult.name}, {getFilteredWeatherResult.sys.country}</button>
             ): <p>Not Found</p>}
         </div>
     </div>

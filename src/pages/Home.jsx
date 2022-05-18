@@ -53,10 +53,12 @@ const Home = () => {
       }
     }
 
-  
-
     useEffect(() => {
       getLocation();
+    }, [])
+
+    useEffect(() => {
+      
 
       // navigator.geolocation.getCurrentPosition(function(position) {
       //   setLatitude(position.coords.latitude)
@@ -90,7 +92,9 @@ const Home = () => {
         (
             <Card>
               <div className="flex justify-between">
-                <h2 className='font-semibold text-2xl'>{getWeatherResult.name} </h2>
+                <div className="flex flex-col">
+                  <h2 className='font-semibold text-2xl'>{getWeatherResult.name}, <span className='text-2xl'>{getWeatherResult.sys.country}</span> </h2>
+                </div>
                 <div className="flex flex-col items-end">
                   <Tanggal dataCalc={getWeatherResult.dt} timezone={getWeatherResult.timezone} />
                   <Tanggal waktu dataCalc={getWeatherResult.dt} timezone={getWeatherResult.timezone} />
