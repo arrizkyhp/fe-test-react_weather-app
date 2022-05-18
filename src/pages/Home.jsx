@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
+import SearchBar from '../components/SearchBar';
 import Tanggal from '../components/Tanggal';
 import Card from '../layout/Card';
 import Navigation from '../layout/Navigation';
@@ -81,7 +82,8 @@ const Home = () => {
   return (
     <>
       <Navigation today disabled={error ? true : false}/>
-      <input className='w-full px-4 h-10 rounded-lg' placeholder='Search City...'/>
+      <SearchBar placeholder="Search City..." />
+     
       {/* <h1>Latitude: {latitude}</h1>
       <h1>Longitude: {longitude}</h1> */}
       {error ? <p className='text-center text-lg text-rose-500 mt-5'>{errorMessage}</p> : getWeatherResult ? 
