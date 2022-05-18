@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
 import SearchBar from '../components/SearchBar';
 import Tanggal from '../components/Tanggal';
 import Card from '../layout/Card';
@@ -128,6 +129,9 @@ const Home = () => {
       ) : (
         <p>{getWeatherError}</p>
       )}
+       <Card>
+            <Footer />
+        </Card>
     </>
   )
 }

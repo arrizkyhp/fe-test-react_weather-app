@@ -44,6 +44,7 @@ const Days = () => {
                 setErrorMessage(getErrorGeolocationMessage)
             }
         }
+        
       }, [dispatch, latitude, longitude, getWeatherLatitude, getWeatherLongitude,getErrorGeolocationMessage])
 
       const meterToKm = (anginMeter) => {
@@ -54,8 +55,11 @@ const Days = () => {
       // console.log(getWeatherLatitude)
       // console.log(getWeatherLongitude)
       // console.log(getErrorGeolocationMessage)
+        
+      
   return (
     <>
+  
         <Navigation day />
         {error ? <p className='text-center text-lg text-rose-500 mt-5'>{errorMessage}</p> : getWeatherFiveDayResult ? 
         (
@@ -84,7 +88,7 @@ const Days = () => {
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    ))} 
                 </div>
             </Card>
         
@@ -93,7 +97,7 @@ const Days = () => {
       ) : (
         <p>{getWeatherFiveDayError}</p>
       )}
-     
+       
     </>
   )
 }
