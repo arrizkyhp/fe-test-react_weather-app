@@ -58,8 +58,6 @@ const Home = () => {
     }, [])
 
     useEffect(() => {
-      
-
       // navigator.geolocation.getCurrentPosition(function(position) {
       //   setLatitude(position.coords.latitude)
       //   setLongitude(position.coords.longitude)

@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { filterWeatherData, getWeatherData } from '../redux/actions/weatherAction';
+import PropTypes from 'prop-types'
 
-const SearchBar = ({ placeholder, data }) => {
+const SearchBar = ({ placeholder }) => {
     const [filteredData, setFilteredData] = useState("")
     const [dataWeather, setDataWeather] = useState({})
     const [itemFilter, setItemFilter] = useState(false)
@@ -47,6 +48,10 @@ const SearchBar = ({ placeholder, data }) => {
     </div>
     
   )
+}
+
+SearchBar.propTypes = {
+    placeholder: PropTypes.string
 }
 
 export default SearchBar

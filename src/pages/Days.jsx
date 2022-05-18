@@ -5,7 +5,7 @@ import Card from '../layout/Card';
 import Navigation from '../layout/Navigation';
 import { getWeatherFiveDayData } from '../redux/actions/weatherAction';
 
-const Days = (props) => {
+const Days = () => {
     const [latitude, setLatitude] = useState("");
     const [longitude, setLongitude] = useState("");
     const [error, setError] = useState(false)
@@ -23,16 +23,28 @@ const Days = (props) => {
 
     useEffect(() => {
         // getLocation();
-        setLatitude(getWeatherLatitude)
-        setLongitude(getWeatherLongitude)
+        if (!getWeatherLatitude ) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+              setLatitude(position.coords.latitude)
+              setLongitude(position.coords.longitude)
+            });
+        } else {
+            setLatitude(getWeatherLatitude)
+            setLongitude(getWeatherLongitude)
+        }
+       
     
         if (latitude != "") {
             dispatch(getWeatherFiveDayData(latitude, longitude))
         } else if (latitude === false ) {
             setError(true)
-            setErrorMessage(getErrorGeolocationMessage)
+            if(getErrorGeolocationMessage == "") {
+                setErrorMessage("No Location")
+            } else {
+                setErrorMessage(getErrorGeolocationMessage)
+            }
         }
-      }, [dispatch, latitude, longitude])
+      }, [dispatch, latitude, longitude, getWeatherLatitude, getWeatherLongitude,getErrorGeolocationMessage])
 
       const meterToKm = (anginMeter) => {
         return (3.6 * anginMeter).toFixed(0)
@@ -55,7 +67,7 @@ const Days = (props) => {
                 <div className="mt-6">
                     {getWeatherFiveDayResult.list.map((item, index) => (
                         <div className='border-y py-2 grid grid-cols-[1fr_1fr_2fr] md:grid-cols-4 grid-rows-2 md:grid-rows-1 px-4 md:px-0 gap-y-1  justify-center items-center' key={index}>
-                            <div className="col-[1/-1] md:col-auto flex md:flex-col justify-between items-center">
+                            <div className="col-[1/-1] md:col-auto flex md:flex-col justify-between items-center md:items-start">
                                 <Tanggal dataCalc={item.dt} timezone={getWeatherFiveDayResult.city.timezone} />
                                 <Tanggal waktu dataCalc={item.dt} timezone={getWeatherFiveDayResult.city.timezone} />
                             </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 const Navigation = ({ today, day}) => {
@@ -9,6 +10,11 @@ const Navigation = ({ today, day}) => {
         <Link className={`text-center p-3 ${day ?  "bg-slate-700 text-white font-bold" : "font-medium"}`} to={"/day"}>6 Day</Link>
       </div>
   )
+}
+
+Navigation.propTypes = {
+  today: PropTypes.bool,
+  day: PropTypes.bool
 }
 
 export default Navigation

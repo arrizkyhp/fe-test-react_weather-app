@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const Tanggal = ({dataCalc, timezone, waktu}) => {
    
@@ -27,6 +28,12 @@ const Tanggal = ({dataCalc, timezone, waktu}) => {
   return (
     <h2 className='font-bold md:font-semibold text-lg md:text-base'>{tanggalIndonesia}</h2>
   )
+}
+
+Tanggal.propTypes = {
+  dataCalc: PropTypes.number,
+  timezone: PropTypes.number,
+  waktu: PropTypes.bool
 }
 
 export default Tanggal
