@@ -16,7 +16,8 @@ const Days = (props) => {
       getWeatherFiveDayLoading, 
       getWeatherFiveDayError, 
       getWeatherLatitude,
-      getWeatherLongitude
+      getWeatherLongitude,
+      getErrorGeolocationMessage
     } = useSelector((state) => state.weatherReducer)
     const dispatch = useDispatch();
 
@@ -27,6 +28,9 @@ const Days = (props) => {
     
         if (latitude != "") {
             dispatch(getWeatherFiveDayData(latitude, longitude))
+        } else if (latitude === false ) {
+            setError(true)
+            setErrorMessage(getErrorGeolocationMessage)
         }
       }, [dispatch, latitude, longitude])
 
@@ -37,6 +41,7 @@ const Days = (props) => {
       // console.log(getWeatherFiveDayResult)
       // console.log(getWeatherLatitude)
       // console.log(getWeatherLongitude)
+      // console.log(getErrorGeolocationMessage)
   return (
     <>
         <Navigation day />

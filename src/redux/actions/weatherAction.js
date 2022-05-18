@@ -1,7 +1,9 @@
 import axios from "axios";
 
 export const GET_WEATHER_DATA = "GET_WEATHER_DATA";
-export const GET_WEATHER_FIVEDAY_DATA = "GET_WEATHER_FIVEDAY_DATA";
+export const GET_WEATHER_FIVEDAY_DATA = "GET_WEATHER_FIVEDAY_DATA"
+export const SET_ERROR_GEOLOCATION = "SET_ERROR_GEOLOCATION"
+;
 
 export const getWeatherData = (lat, lon) => {
     return (dispatch) => {
@@ -86,5 +88,25 @@ export const getWeatherFiveDayData = (lat, lon) => {
                 }
             })
         })
+    }
+}
+
+export const setErrorGeolocation = (errorMessage) => {
+    return (dispatch) => {
+        dispatch({
+            type: SET_ERROR_GEOLOCATION,
+            payload: {
+                errorMessage: false
+            }
+        })
+
+        if(errorMessage != false) {
+            dispatch({
+                type: SET_ERROR_GEOLOCATION,
+                payload: {
+                    errorMessage: errorMessage
+                }
+            })
+        }
     }
 }

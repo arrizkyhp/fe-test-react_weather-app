@@ -1,6 +1,7 @@
 import {
     GET_WEATHER_DATA,
-    GET_WEATHER_FIVEDAY_DATA
+    GET_WEATHER_FIVEDAY_DATA,
+    SET_ERROR_GEOLOCATION
 } from "../../actions/weatherAction"
 
 const initialState = {
@@ -13,6 +14,8 @@ const initialState = {
     getWeatherFiveDayResult: false,
     getWeatherFiveDayLoading: false,
     getWeatherFiveDayError: false,
+
+    getErrorGeolocationMessage: false
 }
 
 const weatherReducer = (state = initialState, action) => {
@@ -32,6 +35,11 @@ const weatherReducer = (state = initialState, action) => {
                 getWeatherFiveDayResult: action.payload.data,
                 getWeatherFiveDayLoading: action.payload.loading,
                 getWeatherFiveDayError: action.payload.errorMessage
+            }
+        case SET_ERROR_GEOLOCATION:
+            return {
+                ...state,
+                getErrorGeolocationMessage: action.payload.errorMessage
             }
             default: 
             return state

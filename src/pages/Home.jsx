@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Tanggal from '../components/Tanggal';
 import Card from '../layout/Card';
 import Navigation from '../layout/Navigation';
-import { getWeatherData } from "../redux/actions/weatherAction"
+import { getWeatherData, setErrorGeolocation } from "../redux/actions/weatherAction"
 
 const Home = () => {
     const [latitude, setLatitude] = useState("");
@@ -12,7 +12,7 @@ const Home = () => {
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
 
-    const { getWeatherResult, getWeatherLoading, getWeatherError } = useSelector((state) => state.weatherReducer)
+    const { getWeatherResult, getWeatherLoading, getWeatherError, getErrorGeolocationMessage } = useSelector((state) => state.weatherReducer)
     const dispatch = useDispatch();
 
     const showPosition = (position) => {
@@ -56,25 +56,31 @@ const Home = () => {
 
     useEffect(() => {
       getLocation();
+
       // navigator.geolocation.getCurrentPosition(function(position) {
       //   setLatitude(position.coords.latitude)
       //   setLongitude(position.coords.longitude)
       // });
+
+      if(error) {
+        dispatch(setErrorGeolocation(errorMessage))
+      }
   
      if (latitude != "") {
       dispatch(getWeatherData(latitude, longitude))
      }
-    }, [dispatch, latitude, longitude])
+    }, [dispatch, latitude, longitude, error, errorMessage])
 
     const meterToKm = (anginMeter) => {
       return (3.6 * anginMeter).toFixed(0)
     }
     
     // console.log(getWeatherResult)
+    // console.log(getErrorGeolocationMessage)
    
   return (
     <>
-      <Navigation today/>
+      <Navigation today disabled={error ? true : false}/>
       <input className='w-full px-4 h-10 rounded-lg' placeholder='Search City...'/>
       {/* <h1>Latitude: {latitude}</h1>
       <h1>Longitude: {longitude}</h1> */}
